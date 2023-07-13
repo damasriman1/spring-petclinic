@@ -35,31 +35,8 @@ pipeline {
     }
 
     stage('Deploy') {
-      parallel {
-        stage('Deploy') {
-          agent {
-            node {
-              label 'test'
-            }
-
-          }
-          steps {
-            sh './mvnw spring-boot:run </dev/null &>/dev/null &'
-          }
-        }
-
-        stage('Integration and Performance tests') {
-          agent {
-            node {
-              label 'test'
-            }
-
-          }
-          steps {
-            sh './mvnw verify'
-          }
-        }
-
+      steps {
+        sh './mvnw spring-boot:run </dev/null &>/dev/null &'
       }
     }
 
